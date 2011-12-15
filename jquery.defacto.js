@@ -79,6 +79,7 @@ $.fn.defacto = function() {
 	 */
 	return this.each(function(options) {
 		var element = $(this);
+		var testInput = document.createElement('input');
 		
 		var config = {
 			defaultColor: '',
@@ -88,6 +89,9 @@ $.fn.defacto = function() {
 		
 		$.fn.extend(config, options);
 		
-		var di = new DefaultInput(element, config);
+		// only run if HTML5 placeholder="" works, and the element has a placeholder
+		if (!('placeholder' in testInput) && !element.attr('placeholder')) {
+			var di = new DefaultInput(element, config);
+		}
 	});
 };
