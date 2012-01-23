@@ -37,6 +37,10 @@ $.fn.defacto = function() {
 				var c = o.clone().attr('type','text');
 				o.replaceWith(c);
 			}
+
+			if ($.browser.msie) {
+				alert('ie');
+			}
 		};
 
 		/**
