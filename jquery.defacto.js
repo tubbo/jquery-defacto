@@ -25,7 +25,7 @@ $.fn.defacto = function() {
 		this.bind = function() {
 			var v = o.attr('value');
 
-			o.attr('placeholder', v)
+			o.attr('value', v)
 			o.bind('focus',function() { self.clear(); })
 			o.bind('blur',function() { self.replace(); });
 
