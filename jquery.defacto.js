@@ -25,7 +25,7 @@ $.fn.defacto = function() {
 		this.bind = function() {
 			var v = o.attr('value');
 
-			o.data('default', v)
+			o.attr('placeholder', v)
 			o.bind('focus',function() { self.clear(); })
 			o.bind('blur',function() { self.replace(); });
 
@@ -89,7 +89,7 @@ $.fn.defacto = function() {
 
 		$.fn.extend(config, options);
 
-		// only run if HTML5 placeholder="" works, and the element has a placeholder
+		// if the browser already has support for placeholders, don't launch this plugin
 		if (!('placeholder' in testInput) && !element.attr('placeholder')) {
 			var di = new DefaultInput(element, config);
 		}
