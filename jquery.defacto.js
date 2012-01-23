@@ -23,7 +23,7 @@ $.fn.defacto = function() {
 		 * @constructor
 		 */
 		this.bind = function() {
-			var v = o.attr('value');
+			var d = o.attr('placeholder');
 
 			o.attr('value', v)
 			o.bind('focus',function() { self.clear(); })
@@ -44,10 +44,10 @@ $.fn.defacto = function() {
 		 */
 		this.replace = function() {
 			var v = o.attr('value');
-			var d = o.data('default');
+			var d = o.data('placeholder');
 			var p = (o.attr('type') == "password");
 
-			if (v=='') o.attr('value',d);
+			if (v=='') o.attr('value', d);
 			if (p && v=='') {
 				if (c.defaultColor) {
 					var tClone = o.clone().attr('type','text').css({color: c.defaultColor});
@@ -56,7 +56,7 @@ $.fn.defacto = function() {
 				}
 				var tClone =  o.clone().attr('type','text');
 				o.replaceWith(tClone);
-				tClone.bind('focus',function() { clearText($(this)); }).data('default',d).attr('value',d).blur();
+				tClone.bind('focus',function() { clearText($(this)); }).attr('placeholder', d).attr('value', d).blur();
 			}
 		};
 
@@ -64,7 +64,7 @@ $.fn.defacto = function() {
 		 * Clears the input's default text to prepare for typing.
 		 */
 		this.clear = function() {
-			var v = o.attr('value');
+			var v = o.attr('placeholder');
 			var d = o.data('default');
 			var p = (o.attr('type') == 'password');
 
@@ -95,8 +95,11 @@ $.fn.defacto = function() {
 		$.fn.extend(config, options);
 
 		// if the browser already has support for placeholders, don't launch this plugin
-		if (!('placeholder' in testInput) && !element.attr('placeholder')) {
+		if (!('placeholder' in testInput)) {	// && !element.attr('placeholder')
 			var di = new DefaultInput(element, config);
+			console.log('no html5');
+		} else {
+			console.log('html5');
 		}
 	});
 };
