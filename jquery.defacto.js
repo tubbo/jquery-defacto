@@ -32,6 +32,11 @@ $.fn.defacto = function() {
 			if (c.defaultColor) {
 				o.css({color: c.defaultColor});
 			}
+
+			if (o.attr('type') == "password") {
+				var c = o.clone().attr('type','text');
+				o.replaceWith(c);
+			}
 		};
 
 		/**
@@ -40,7 +45,7 @@ $.fn.defacto = function() {
 		this.replace = function() {
 			var v = o.attr('value');
 			var d = o.data('default');
-			var p = o.hasClass('password');
+			var p = (o.attr('type') == "password");
 
 			if (v=='') o.attr('value',d);
 			if (p && v=='') {
@@ -61,7 +66,7 @@ $.fn.defacto = function() {
 		this.clear = function() {
 			var v = o.attr('value');
 			var d = o.data('default');
-			var p = (o.hasClass('password') || (o.attr('type') == 'password'));
+			var p = (o.attr('type') == 'password');
 
 			if (v==d) o.attr('value','');
 			if (p) {
